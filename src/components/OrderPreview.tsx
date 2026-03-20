@@ -445,10 +445,12 @@ export default function OrderPreview({
         {/* Bottom fixed area */}
         <div className="of-bottom-fixed">
           <div className="of-materials-row">
-            <div className="of-materials-box">
-              <div className="label">拡材のご希望：</div>
-              <div>□A6POP{"\u3000\u3000"}□A4パネル（30冊以上）</div>
-            </div>
+            {!form.hideMaterials && (
+              <div className="of-materials-box">
+                <div className="label">拡材のご希望：</div>
+                <div>□A6POP{"\u3000\u3000"}□A4パネル（30冊以上）</div>
+              </div>
+            )}
             {form.badgeText && (
               <div className="of-reprint-badge">{form.badgeText}</div>
             )}

@@ -61,7 +61,7 @@ export default function HomePage() {
               status={status}
               setStatus={setStatus}
             />
-            <BookForm form={form} updateField={updateField} />
+            <BookForm form={form} updateField={updateField} setForm={setForm} />
             <SalesEditor
               salesData={salesData}
               updateSalesRow={updateSalesRow}

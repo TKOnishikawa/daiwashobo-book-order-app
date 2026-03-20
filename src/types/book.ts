@@ -3,9 +3,9 @@ export interface BookMasterRecord {
   title: string;
   author: string;
   price: string;
-  pub_date: string;
   genre: string;
-  cover_url: string;
+  size: string;
+  pages: string;
 }
 
 export interface SalesRow {
@@ -23,8 +23,8 @@ export interface OrderFormData {
   price: string;
   size: string;
   pages: string;
-  pubdate: string;
   doctype: string;
+  hideMaterials: boolean;
   genreTag: string;
   badgeText: string;
   catchCopy: string;

@@ -5,9 +5,10 @@ import type { OrderFormData } from "@/types/book";
 interface Props {
   form: OrderFormData;
   updateField: (field: keyof OrderFormData, value: string) => void;
+  setForm: React.Dispatch<React.SetStateAction<OrderFormData>>;
 }
 
-export default function BookForm({ form, updateField }: Props) {
+export default function BookForm({ form, updateField, setForm }: Props) {
   return (
     <>
       <div className="form-group">
@@ -65,27 +66,17 @@ export default function BookForm({ form, updateField }: Props) {
             <option value="B6判">B6判</option>
             <option value="新書判">新書判</option>
             <option value="文庫判">文庫判</option>
+            <option value="文庫版">文庫版</option>
           </select>
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-group">
-          <label>ページ数</label>
-          <input
-            type="text"
-            value={form.pages}
-            onChange={(e) => updateField("pages", e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>発売日</label>
-          <input
-            type="text"
-            value={form.pubdate}
-            placeholder="YYYY/MM/DD"
-            onChange={(e) => updateField("pubdate", e.target.value)}
-          />
-        </div>
+      <div className="form-group">
+        <label>ページ数</label>
+        <input
+          type="text"
+          value={form.pages}
+          onChange={(e) => updateField("pages", e.target.value)}
+        />
       </div>
 
       <h3 style={{ marginTop: 20 }}>注文書情報</h3>
@@ -164,6 +155,16 @@ export default function BookForm({ form, updateField }: Props) {
           onChange={(e) => updateField("promoLine3", e.target.value)}
         />
       </div>
+
+      <h3 style={{ marginTop: 20 }}>表示設定</h3>
+      <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.85rem" }}>
+        <input
+          type="checkbox"
+          checked={form.hideMaterials}
+          onChange={(e) => setForm((prev) => ({ ...prev, hideMaterials: e.target.checked }))}
+        />
+        拡材のご希望を非表示
+      </label>
     </>
   );
 }

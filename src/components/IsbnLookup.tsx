@@ -36,12 +36,8 @@ export default function IsbnLookup({
           author: book.author,
           price: book.price,
         };
-        if (book.pub_date && book.pub_date !== "19000101" && book.pub_date.length === 8) {
-          const y = book.pub_date.slice(0, 4);
-          const m = book.pub_date.slice(4, 6);
-          const d = book.pub_date.slice(6, 8);
-          updates.pubdate = `${y}/${parseInt(m)}/${parseInt(d)}`;
-        }
+        if (book.size) updates.size = book.size;
+        if (book.pages) updates.pages = book.pages;
         onBookFound(updates);
         setStatus({
           type: "ok",
