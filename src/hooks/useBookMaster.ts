@@ -10,7 +10,8 @@ export function useBookMaster() {
   const indexRef = useRef<Map<string, BookMasterRecord>>(new Map());
 
   useEffect(() => {
-    fetch("/book_master.json")
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    fetch(`${basePath}/book_master.json`)
       .then((r) => r.json())
       .then((records: BookMasterRecord[]) => {
         indexRef.current = buildIsbnIndex(records);
