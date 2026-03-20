@@ -73,10 +73,14 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
 }
 .btn-word { background: #2563eb; color: white; }
 .btn-word:hover { background: #1d4ed8; }
-.btn-pdf, .btn-save, .btn-load { background: var(--bg-3); color: var(--text-1); border: 1px solid var(--border); }
-.btn-pdf:hover, .btn-save:hover, .btn-load:hover { border-color: var(--blue); }
-.btn-save { border-color: var(--green); }
-.btn-load { border-color: var(--amber); }
+.btn-pdf-main { background: #D32F2F; color: white; border: none; width: 100%; }
+.btn-pdf-main:hover { background: #B71C1C; }
+.action-row { display: flex; gap: 8px; }
+.action-row .btn-save, .action-row .btn-load { flex: 1; }
+.btn-save { background: var(--bg-3); color: var(--text-1); border: 1px solid var(--green); }
+.btn-save:hover { border-color: var(--green); background: var(--bg-2); }
+.btn-load { background: var(--bg-3); color: var(--text-1); border: 1px solid var(--amber); }
+.btn-load:hover { border-color: var(--amber); background: var(--bg-2); }
 
 /* Preview */
 .preview-wrapper { position: relative; }

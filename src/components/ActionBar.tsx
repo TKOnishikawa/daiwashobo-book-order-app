@@ -114,15 +114,17 @@ export default function ActionBar({
 
   return (
     <div className="action-bar">
-<button className="btn-action btn-pdf" onClick={handlePdfSave}>
+      <button className="btn-action btn-pdf-main" onClick={handlePdfSave}>
         PDF保存
       </button>
-      <button className="btn-action btn-save" onClick={handleJsonSave}>
-        保存
-      </button>
-      <button className="btn-action btn-load" onClick={() => fileInputRef.current?.click()}>
-        読込
-      </button>
+      <div className="action-row">
+        <button className="btn-action btn-save" onClick={handleJsonSave}>
+          保存
+        </button>
+        <button className="btn-action btn-load" onClick={() => fileInputRef.current?.click()}>
+          読込
+        </button>
+      </div>
       <input
         ref={fileInputRef}
         type="file"
