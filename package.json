@@ -1,0 +1,26 @@
+{
+  "name": "book-order-app",
+  "version": "1.0.0",
+  "description": "大和書房 書店向け注文書自動生成アプリ",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@types/node": "^25.3.5",
+    "@types/react": "^19.2.14",
+    "docx": "^9.5.0",
+    "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7"
+  }
+}

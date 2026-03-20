@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env
+.env.local
+keepa_*.json
+sheets_ids.json
+isbn_master.csv
