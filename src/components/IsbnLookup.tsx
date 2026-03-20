@@ -77,7 +77,7 @@ export default function IsbnLookup({
         <input
           type="text"
           value={isbn}
-          placeholder="978-4-479-..."
+          placeholder="9784479..."
           onChange={(e) => handleInput(e.target.value)}
         />
         <button className="btn-lookup" onClick={() => doLookup(isbn)}>

@@ -279,9 +279,9 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
 /* Bottom Fixed Area (materials + order table) */
 .of-bottom-fixed { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 24px 16px; }
 .of-materials-row {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 8px;
+  display: flex; align-items: flex-end; justify-content: flex-end; gap: 8px;
 }
-.of-materials-row .of-materials-box { flex: 1; position: relative; top: 9px; left: 1px; }
+.of-materials-row .of-materials-box { flex: 1; position: relative; top: 9px; left: 1px; margin-right: auto; }
 .of-materials-row .of-materials-box .label { display: inline; }
 .of-materials-row .of-materials-box div { font-size: 0.9504rem; }
 .of-reprint-badge {

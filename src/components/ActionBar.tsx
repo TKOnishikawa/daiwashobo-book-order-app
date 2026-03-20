@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import type { OrderFormData, SalesRow } from "@/types/book";
-import { generateWord } from "@/lib/word-generator";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
@@ -31,9 +30,6 @@ export default function ActionBar({
 }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleWordDl = async () => {
-    await generateWord(form, salesData);
-  };
 
   const handlePdfSave = async () => {
     const panel = document.querySelector(".preview-panel") as HTMLElement;
@@ -118,10 +114,7 @@ export default function ActionBar({
 
   return (
     <div className="action-bar">
-      <button className="btn-action btn-word" onClick={handleWordDl}>
-        Word DL
-      </button>
-      <button className="btn-action btn-pdf" onClick={handlePdfSave}>
+<button className="btn-action btn-pdf" onClick={handlePdfSave}>
         PDF保存
       </button>
       <button className="btn-action btn-save" onClick={handleJsonSave}>
