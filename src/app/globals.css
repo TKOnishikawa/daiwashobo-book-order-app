@@ -66,9 +66,9 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
 .btn-del { color: var(--red); border-color: transparent; background: none; cursor: pointer; font-size: 0.9rem; padding: 0 4px; }
 
 /* Action buttons */
-.action-bar { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.action-bar { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
 .btn-action {
-  flex: 1; padding: 10px 16px; border: none; border-radius: 8px; font-size: 0.9rem;
+  padding: 10px 16px; border: none; border-radius: 8px; font-size: 0.9rem; width: 100%;
   font-weight: 700; cursor: pointer; font-family: var(--font-jp); min-width: 120px;
 }
 .btn-word { background: #2563eb; color: white; }
