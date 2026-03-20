@@ -259,9 +259,7 @@ export default function OrderPreview({
           {/* Catch Copy - black bg, yellow text */}
           <div className="of-catch-banner">
             <div className="of-catch-main">{form.catchCopy || "\u3000"}</div>
-            {form.subCatch && (
-              <div className="of-catch-sub">{form.subCatch}</div>
-            )}
+            <div className="of-catch-sub">{form.subCatch || "\u3000"}</div>
           </div>
 
           {/* FAX Row */}
