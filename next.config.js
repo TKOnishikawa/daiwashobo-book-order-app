@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const basePath = process.env.NODE_ENV === "production" ? "/daiwashobo-book-order-app" : "";
+const basePath = "";
 
 const nextConfig = {
   output: "export",
