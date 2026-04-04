@@ -10,8 +10,7 @@ export interface BookMasterRecord {
 
 export interface SalesRow {
   store: string;
-  stock: string;
-  sold: string;
+  value: string;
 }
 
 export interface OrderFormData {
@@ -33,4 +32,6 @@ export interface OrderFormData {
   promoLine2: string;
   promoLine3: string;
   prText: string;
+  salesLabel: string;
+  materialsText: string;
 }

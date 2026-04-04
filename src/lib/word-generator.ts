@@ -60,7 +60,7 @@ export async function generateWord(
   form: OrderFormData,
   salesData: SalesRow[]
 ) {
-  const activeSales = salesData.filter((s) => s.store);
+  // activeSales not used in current layout (sales data rendered via preview only)
   const isbn13 = normalizeIsbn(form.isbn);
   const bookSpecs = [
     form.size,
@@ -164,7 +164,9 @@ export async function generateWord(
     })
   );
 
-  // Title - green bg (fixed)
+  // Title - green bg (fixed) with auto-sizing for long titles
+  const titleSize =
+    form.title.length > 35 ? 18 : form.title.length > 25 ? 24 : SIZES.title;
   children.push(
     new Paragraph({
       shading: { type: ShadingType.SOLID, color: C(COLORS.titleBlockBg) },
@@ -173,7 +175,7 @@ export async function generateWord(
         new TextRun({
           text: form.title,
           bold: true,
-          size: S(SIZES.title),
+          size: S(titleSize),
           color: C(COLORS.titleBlockText),
           font: FONTS.gothicUBP,
         }),
@@ -256,18 +258,20 @@ export async function generateWord(
   }
 
   // Materials (fixed at bottom area)
-  children.push(
-    new Paragraph({
-      frame: frame(600, Y.materials, 5000, 600),
-      children: [
-        new TextRun({
-          text: "拡材のご希望：\n□A6POP\u3000\u3000□A4パネル（30冊以上）",
-          size: S(SIZES.materialsLabel),
-          font: FONTS.gothicUB,
-        }),
-      ],
-    })
-  );
+  if (!form.hideMaterials) {
+    children.push(
+      new Paragraph({
+        frame: frame(600, Y.materials, 5000, 600),
+        children: [
+          new TextRun({
+            text: `拡材のご希望：\n${form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）"}`,
+            size: S(SIZES.materialsLabel),
+            font: FONTS.gothicUB,
+          }),
+        ],
+      })
+    );
+  }
 
   // Badge text (fixed at bottom right)
   if (form.badgeText) {
