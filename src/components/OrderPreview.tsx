@@ -272,6 +272,9 @@ export default function OrderPreview({
           {/* Title Block - green background */}
           <div className="of-title-block">
             <div className="of-title" style={{ fontSize: `${form.titleSize}rem` }}>{form.title}</div>
+            {form.subtitle && (
+              <div className="of-subtitle">{form.subtitle}</div>
+            )}
             <div className="of-author-line">
               <span className="author-info">
                 {form.authorTitle && (
@@ -471,6 +474,9 @@ export default function OrderPreview({
                   <td className="ot-qty-td"></td>
                   <td className="ot-book-td">
                     <div className="ot-book-title">{form.title}</div>
+                    {form.subtitle && (
+                      <div className="ot-book-subtitle">{form.subtitle}</div>
+                    )}
                     <div className="ot-book-isbn">
                       ISBN{isbn13 ? isbn13 : ""}
                       {"\u3000"}

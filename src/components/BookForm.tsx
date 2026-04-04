@@ -12,9 +12,9 @@ export default function BookForm({ form, updateField, setForm }: Props) {
   return (
     <>
       <div className="form-group">
-        <label>書籍タイトル（サブタイトルが必要な場合は後ろに手動追加）</label>
-        <textarea
-          rows={2}
+        <label>書籍タイトル</label>
+        <input
+          type="text"
           value={form.title}
           onChange={(e) => updateField("title", e.target.value)}
         />
@@ -30,6 +30,15 @@ export default function BookForm({ form, updateField, setForm }: Props) {
             style={{ flex: 1 }}
           />
         </div>
+      </div>
+      <div className="form-group">
+        <label>副題（任意）</label>
+        <input
+          type="text"
+          value={form.subtitle}
+          placeholder="（任意）"
+          onChange={(e) => updateField("subtitle", e.target.value)}
+        />
       </div>
       <div className="form-group">
         <label>著者肩書き</label>
