@@ -16,6 +16,7 @@ export interface SalesRow {
 export interface OrderFormData {
   isbn: string;
   title: string;
+  titleSize: number;
   subtitle: string;
   author: string;
   authorTitle: string;

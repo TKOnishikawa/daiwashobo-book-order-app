@@ -18,6 +18,18 @@ export default function BookForm({ form, updateField, setForm }: Props) {
           value={form.title}
           onChange={(e) => updateField("title", e.target.value)}
         />
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
+          <span style={{ fontSize: "0.75rem", color: "var(--text-3)", whiteSpace: "nowrap" }}>文字サイズ: {form.titleSize}rem</span>
+          <input
+            type="range"
+            min={0.8}
+            max={3.5}
+            step={0.1}
+            value={form.titleSize}
+            onChange={(e) => setForm((prev) => ({ ...prev, titleSize: parseFloat(e.target.value) }))}
+            style={{ flex: 1 }}
+          />
+        </div>
       </div>
       <div className="form-group">
         <label>著者肩書き</label>

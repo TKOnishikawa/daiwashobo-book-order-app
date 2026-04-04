@@ -6,6 +6,7 @@ import type { OrderFormData, SalesRow } from "@/types/book";
 const INITIAL_FORM: OrderFormData = {
   isbn: "9784479798446",
   title: "資本主義と、生きていく。",
+  titleSize: 2.6,
   subtitle: "",
   author: "品川皓亮",
   authorTitle: "（株）COTEN 歴史調査チーム",
