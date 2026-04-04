@@ -166,7 +166,12 @@ export async function generateWord(
 
   // Title - green bg (fixed) with auto-sizing for long titles
   const titleSize =
-    form.title.length > 35 ? 18 : form.title.length > 25 ? 24 : SIZES.title;
+    form.title.length > 40 ? 12 :
+    form.title.length > 35 ? 14 :
+    form.title.length > 30 ? 17 :
+    form.title.length > 25 ? 20 :
+    form.title.length > 18 ? 25 :
+    SIZES.title;
   children.push(
     new Paragraph({
       shading: { type: ShadingType.SOLID, color: C(COLORS.titleBlockBg) },

@@ -274,8 +274,15 @@ export default function OrderPreview({
             <div
               className="of-title"
               style={
-                form.title.length > 25
-                  ? { fontSize: form.title.length > 35 ? "1.5rem" : "1.9rem" }
+                form.title.length > 18
+                  ? {
+                      fontSize:
+                        form.title.length > 40 ? "1.0rem" :
+                        form.title.length > 35 ? "1.2rem" :
+                        form.title.length > 30 ? "1.4rem" :
+                        form.title.length > 25 ? "1.7rem" :
+                        "2.1rem",
+                    }
                   : undefined
               }
             >
