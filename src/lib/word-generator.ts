@@ -60,7 +60,7 @@ export async function generateWord(
   form: OrderFormData,
   salesData: SalesRow[]
 ) {
-  // activeSales not used in current layout (sales data rendered via preview only)
+  const activeSales = salesData.filter((s) => s.store);
   const isbn13 = normalizeIsbn(form.isbn);
   const bookSpecs = [
     form.size,
@@ -164,14 +164,7 @@ export async function generateWord(
     })
   );
 
-  // Title - green bg (fixed) with auto-sizing for long titles
-  const titleSize =
-    form.title.length > 40 ? 12 :
-    form.title.length > 35 ? 14 :
-    form.title.length > 30 ? 17 :
-    form.title.length > 25 ? 20 :
-    form.title.length > 18 ? 25 :
-    SIZES.title;
+  // Title - green bg (fixed)
   children.push(
     new Paragraph({
       shading: { type: ShadingType.SOLID, color: C(COLORS.titleBlockBg) },
@@ -180,7 +173,7 @@ export async function generateWord(
         new TextRun({
           text: form.title,
           bold: true,
-          size: S(titleSize),
+          size: S(SIZES.title),
           color: C(COLORS.titleBlockText),
           font: FONTS.gothicUBP,
         }),
@@ -263,20 +256,18 @@ export async function generateWord(
   }
 
   // Materials (fixed at bottom area)
-  if (!form.hideMaterials) {
-    children.push(
-      new Paragraph({
-        frame: frame(600, Y.materials, 5000, 600),
-        children: [
-          new TextRun({
-            text: `拡材のご希望：\n${form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）"}`,
-            size: S(SIZES.materialsLabel),
-            font: FONTS.gothicUB,
-          }),
-        ],
-      })
-    );
-  }
+  children.push(
+    new Paragraph({
+      frame: frame(600, Y.materials, 5000, 600),
+      children: [
+        new TextRun({
+          text: "拡材のご希望：\n□A6POP\u3000\u3000□A4パネル（30冊以上）",
+          size: S(SIZES.materialsLabel),
+          font: FONTS.gothicUB,
+        }),
+      ],
+    })
+  );
 
   // Badge text (fixed at bottom right)
   if (form.badgeText) {

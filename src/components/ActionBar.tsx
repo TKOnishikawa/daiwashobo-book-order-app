@@ -4,7 +4,6 @@ import { useRef } from "react";
 import type { OrderFormData, SalesRow } from "@/types/book";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-import { generateWord } from "@/lib/word-generator";
 
 interface SaveData {
   form: OrderFormData;
@@ -113,17 +112,10 @@ export default function ActionBar({
     e.target.value = "";
   };
 
-  const handleWordSave = async () => {
-    await generateWord(form, salesData);
-  };
-
   return (
     <div className="action-bar">
       <button className="btn-action btn-pdf-main" onClick={handlePdfSave}>
         PDF保存
-      </button>
-      <button className="btn-action btn-word" onClick={handleWordSave}>
-        Word出力
       </button>
       <div className="action-row">
         <button className="btn-action btn-save" onClick={handleJsonSave}>

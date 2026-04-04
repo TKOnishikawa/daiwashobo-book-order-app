@@ -32,7 +32,6 @@ export default function IsbnLookup({
       const book = lookupByIsbn(index, raw);
       if (book) {
         const updates: Partial<OrderFormData> = {
-          isbn: book.isbn13,
           title: book.title,
           author: book.author,
           price: book.price,
@@ -44,7 +43,7 @@ export default function IsbnLookup({
           type: "ok",
           message: `${book.title} / ${book.author || "(著者不明)"}`,
         });
-      } else if (raw.replace(/[^0-9]/g, "").length >= 5) {
+      } else if (raw.replace(/[^0-9]/g, "").length >= 10) {
         setStatus({ type: "err", message: "マスタに該当なし（手入力してください）" });
       } else {
         setStatus({ type: "", message: "" });
@@ -73,12 +72,12 @@ export default function IsbnLookup({
 
   return (
     <div className="form-group">
-      <label>ISBN / 5桁コード（入力で自動検索）</label>
+      <label>ISBN-13（入力で自動検索）</label>
       <div className="isbn-row">
         <input
           type="text"
           value={isbn}
-          placeholder="9784479... または 5桁コード"
+          placeholder="9784479..."
           onChange={(e) => handleInput(e.target.value)}
         />
         <button className="btn-lookup" onClick={() => doLookup(isbn)}>

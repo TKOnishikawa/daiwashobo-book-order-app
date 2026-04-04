@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState } from "react";
+import { useMemo, useRef, useCallback, useState } from "react";
 import type { OrderFormData, SalesRow, BookMasterRecord } from "@/types/book";
 import { normalizeIsbn } from "@/lib/book-master";
 
@@ -124,6 +124,12 @@ export default function OrderPreview({
     isbn13.length === 13
       ? `https://www.books.or.jp/img/books_icon/${isbn13}.jpg`
       : "";
+
+  const activeSales = useMemo(
+    () => salesData.filter((s) => s.store),
+    [salesData]
+  );
+
 
   const bookSpecs = [
     form.size,
@@ -271,7 +277,7 @@ export default function OrderPreview({
 
           {/* Title Block - green background */}
           <div className="of-title-block">
-            <div className="of-title" style={{ fontSize: `${form.titleSize}rem` }}>{form.title}</div>
+            <div className="of-title">{form.title}</div>
             {form.subtitle && (
               <div className="of-subtitle">{form.subtitle}</div>
             )}
@@ -300,14 +306,14 @@ export default function OrderPreview({
             <div className="of-col-right">
               {/* Sales Section */}
               <div className="of-sales-section">
-                <div className="of-sales-header">{form.salesLabel || "初速販売実績"}</div>
+                <div className="of-sales-header">初速販売実績</div>
                 <div className="of-sales-list">
                   {salesData.slice(0, 4).map((s, i) => (
                     <div className="of-sales-row" key={i}>
                       <span className="of-sales-store">{s.store || "\u3000"}</span>
                       {s.store ? (
                         <span className="of-sales-numbers">
-                          {s.value}
+                          {s.stock}冊入{s.sold}冊売
                         </span>
                       ) : (
                         <span>{"\u3000"}</span>
@@ -442,7 +448,7 @@ export default function OrderPreview({
             {!form.hideMaterials && (
               <div className="of-materials-box">
                 <div className="label">拡材のご希望：</div>
-                <div>{form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）"}</div>
+                <div>□A6POP{"\u3000\u3000"}□A4パネル（30冊以上）</div>
               </div>
             )}
             {form.badgeText && (
