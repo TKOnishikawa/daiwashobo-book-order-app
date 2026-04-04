@@ -271,28 +271,7 @@ export default function OrderPreview({
 
           {/* Title Block - green background */}
           <div className="of-title-block">
-            <div
-              className="of-title"
-              style={
-                form.title.length > 18
-                  ? {
-                      fontSize:
-                        form.title.length > 40 ? "1.0rem" :
-                        form.title.length > 35 ? "1.2rem" :
-                        form.title.length > 30 ? "1.4rem" :
-                        form.title.length > 25 ? "1.7rem" :
-                        "2.1rem",
-                    }
-                  : undefined
-              }
-            >
-              {form.title}
-            </div>
-            {form.subtitle ? (
-              <div className="of-subtitle">{form.subtitle}</div>
-            ) : (
-              <div className="of-subtitle">{"\u3000"}</div>
-            )}
+            <div className="of-title">{form.title}</div>
             <div className="of-author-line">
               <span className="author-info">
                 {form.authorTitle && (
@@ -492,9 +471,6 @@ export default function OrderPreview({
                   <td className="ot-qty-td"></td>
                   <td className="ot-book-td">
                     <div className="ot-book-title">{form.title}</div>
-                    {form.subtitle && (
-                      <div className="ot-book-subtitle">{form.subtitle}</div>
-                    )}
                     <div className="ot-book-isbn">
                       ISBN{isbn13 ? isbn13 : ""}
                       {"\u3000"}

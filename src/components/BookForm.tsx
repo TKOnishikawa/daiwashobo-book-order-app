@@ -12,20 +12,11 @@ export default function BookForm({ form, updateField, setForm }: Props) {
   return (
     <>
       <div className="form-group">
-        <label>書籍タイトル</label>
-        <input
-          type="text"
+        <label>書籍タイトル（サブタイトルが必要な場合は後ろに手動追加）</label>
+        <textarea
+          rows={2}
           value={form.title}
           onChange={(e) => updateField("title", e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>サブタイトル</label>
-        <input
-          type="text"
-          value={form.subtitle}
-          placeholder="（任意）"
-          onChange={(e) => updateField("subtitle", e.target.value)}
         />
       </div>
       <div className="form-group">

@@ -177,7 +177,7 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
 /* タイトル: 2.6rem（ユーザー指定） */
 .of-title {
   font-size: 2.6rem; font-weight: 900; color: white; margin-bottom: 2px;
-  line-height: 1.25; text-align: center;
+  line-height: 1.25; text-align: center; white-space: pre-line;
 }
 /* サブタイトル: 1.3rem（ユーザー指定） */
 .of-subtitle { font-size: 1.3rem; color: rgba(255,255,255,0.95); margin-bottom: 4px; line-height: 1.4; font-weight: 700; text-align: center; }
