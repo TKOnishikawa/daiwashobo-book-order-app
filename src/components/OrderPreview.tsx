@@ -133,20 +133,23 @@ export default function OrderPreview({
   );
 
 
-  // Auto-fit ot-book-title to single line
+  // Auto-fit ot-book-title to single line using off-screen measurement
   useEffect(() => {
-    const el = otTitleRef.current;
-    if (!el || !el.parentElement) return;
-    const maxW = el.parentElement.clientWidth - 20; // padding
+    const td = otTitleRef.current?.closest("td");
+    if (!td) return;
+    const maxW = td.clientWidth - 20;
+    // Create off-screen span to measure text width
+    const span = document.createElement("span");
+    span.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font-weight:900;letter-spacing:0.02em;";
+    span.textContent = form.title + (form.subtitle ? " " + form.subtitle : "");
+    document.body.appendChild(span);
     let size = 1.92;
-    el.style.fontSize = `${size}rem`;
-    el.style.display = "inline-block";
-    el.style.whiteSpace = "nowrap";
-    while (el.scrollWidth > maxW && size > 0.6) {
+    span.style.fontSize = `${size}rem`;
+    while (span.offsetWidth > maxW && size > 0.6) {
       size -= 0.05;
-      el.style.fontSize = `${size}rem`;
+      span.style.fontSize = `${size}rem`;
     }
-    el.style.display = "";
+    document.body.removeChild(span);
     setOtTitleSize(size);
   }, [form.title, form.subtitle]);
 
