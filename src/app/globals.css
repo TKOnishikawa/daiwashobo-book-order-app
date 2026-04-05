@@ -173,7 +173,7 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
 /* Title Block - green background */
 .of-title-block {
   background: #1B5E20; color: white; padding: 10px 14px 8px; margin-bottom: 6px;
-  height: 165px; overflow: visible;
+  height: 150px; overflow: visible;
   position: relative;
 }
 /* タイトル: 2.6rem（ユーザー指定） */
@@ -210,7 +210,7 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
   min-height: 120px; padding: 4px 0;
 }
 .of-cover-container {
-  position: absolute; left: 0px; top: -30px;
+  position: absolute; left: 0px; top: 0px;
   width: 239px; height: 351px; border: none; background: #fafafa;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden; z-index: 1;
@@ -394,7 +394,7 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
   .of-cover-container {
     position: absolute !important;
     left: 0px !important;
-    top: -30px !important;
+    top: 0px !important;
   }
   .of-display-container {
     position: absolute !important;
