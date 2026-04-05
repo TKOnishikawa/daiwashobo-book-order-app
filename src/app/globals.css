@@ -173,6 +173,7 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
 /* Title Block - green background */
 .of-title-block {
   background: #1B5E20; color: white; padding: 10px 14px 8px; margin-bottom: 6px;
+  height: 130px; overflow: hidden;
 }
 /* タイトル: 2.6rem（ユーザー指定） */
 .of-title {
