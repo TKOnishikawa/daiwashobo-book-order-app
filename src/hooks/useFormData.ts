@@ -9,7 +9,7 @@ const INITIAL_FORM: OrderFormData = {
   titleSize: 2.6,
   subtitle: "",
   author: "品川皓亮",
-  authorTitle: "（株）COTEN 歴史調査チーム",
+  authorTitle: "",
   price: "1800",
   size: "四六判",
   pages: "312",
