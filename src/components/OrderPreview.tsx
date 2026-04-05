@@ -277,7 +277,7 @@ export default function OrderPreview({
 
           {/* Title Block - green background */}
           <div className="of-title-block">
-            <div className="of-title">{form.title}</div>
+            <div className="of-title" style={{ fontSize: `${form.titleSize}rem` }}>{form.title}</div>
             {form.subtitle && (
               <div className="of-subtitle">{form.subtitle}</div>
             )}
