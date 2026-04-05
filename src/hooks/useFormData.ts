@@ -7,7 +7,7 @@ const INITIAL_FORM: OrderFormData = {
   isbn: "9784479798446",
   title: "資本主義と、生きていく。",
   titleSize: 2.6,
-  subtitle: "歴史と思想で解き明かす「構造的しんどさ」の正体",
+  subtitle: "",
   author: "品川皓亮",
   authorTitle: "（株）COTEN 歴史調査チーム",
   price: "1800",
@@ -23,13 +23,15 @@ const INITIAL_FORM: OrderFormData = {
   promoLine2: "都内大型店, 地方都市, 私鉄沿線 で良好！",
   promoLine3: "深井龍之介さん推薦！",
   prText: "",
+  salesLabel: "初速販売実績",
+  materialsText: "□A6POP\u3000\u3000□A4パネル（30冊以上）",
 };
 
 const INITIAL_SALES: SalesRow[] = [
-  { store: "ジュンク堂書店池袋本店", stock: "100", sold: "34" },
-  { store: "丸善丸の内本店", stock: "100", sold: "31" },
-  { store: "紀伊國屋書店梅田本店", stock: "100", sold: "31" },
-  { store: "紀伊國屋書店梅田本店", stock: "100", sold: "31" },
+  { store: "ジュンク堂書店池袋本店", value: "100冊入34冊売" },
+  { store: "丸善丸の内本店", value: "100冊入31冊売" },
+  { store: "紀伊國屋書店梅田本店", value: "100冊入31冊売" },
+  { store: "紀伊國屋書店梅田本店", value: "100冊入31冊売" },
 ];
 
 export function useFormData() {
@@ -53,7 +55,7 @@ export function useFormData() {
   );
 
   const addSalesRow = useCallback(() => {
-    setSalesData((prev) => [...prev, { store: "", stock: "", sold: "" }]);
+    setSalesData((prev) => [...prev, { store: "", value: "" }]);
   }, []);
 
   const removeSalesRow = useCallback((idx: number) => {
@@ -62,9 +64,10 @@ export function useFormData() {
 
   const clearSales = useCallback(() => {
     setSalesData([
-      { store: "", stock: "", sold: "" },
-      { store: "", stock: "", sold: "" },
-      { store: "", stock: "", sold: "" },
+      { store: "", value: "" },
+      { store: "", value: "" },
+      { store: "", value: "" },
+      { store: "", value: "" },
     ]);
   }, []);
 

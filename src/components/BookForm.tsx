@@ -101,6 +101,7 @@ export default function BookForm({ form, updateField, setForm }: Props) {
           <option value="重版案内">重版案内</option>
           <option value="新刊案内">新刊案内</option>
           <option value="フェア案内">フェア案内</option>
+          <option value="季節商材案内">季節商材案内</option>
         </select>
       </div>
       <div className="form-group">
@@ -168,6 +169,17 @@ export default function BookForm({ form, updateField, setForm }: Props) {
         />
       </div>
 
+      <h3 style={{ marginTop: 20 }}>販売実績</h3>
+      <div className="form-group">
+        <label>セクションタイトル</label>
+        <input
+          type="text"
+          value={form.salesLabel}
+          placeholder="初速販売実績"
+          onChange={(e) => updateField("salesLabel", e.target.value)}
+        />
+      </div>
+
       <h3 style={{ marginTop: 20 }}>表示設定</h3>
       <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.85rem" }}>
         <input
@@ -177,6 +189,17 @@ export default function BookForm({ form, updateField, setForm }: Props) {
         />
         拡材のご希望を非表示
       </label>
+      {!form.hideMaterials && (
+        <div className="form-group" style={{ marginTop: 8 }}>
+          <label>拡材テキスト</label>
+          <input
+            type="text"
+            value={form.materialsText}
+            placeholder="□A6POP　　□A4パネル（30冊以上）"
+            onChange={(e) => updateField("materialsText", e.target.value)}
+          />
+        </div>
+      )}
     </>
   );
 }

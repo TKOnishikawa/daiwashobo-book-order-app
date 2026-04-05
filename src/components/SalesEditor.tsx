@@ -17,14 +17,13 @@ export default function SalesEditor({
 }: Props) {
   return (
     <>
-      <h3 style={{ marginTop: 20 }}>初速販売実績（4行固定）</h3>
+      <h3 style={{ marginTop: 20 }}>販売実績（4行固定）</h3>
       <div className="sales-editor">
         <table>
           <thead>
             <tr>
               <th>書店名</th>
-              <th style={{ width: 70 }}>入数</th>
-              <th style={{ width: 70 }}>売数</th>
+              <th style={{ width: 130 }}>実績（自由入力）</th>
             </tr>
           </thead>
           <tbody>
@@ -38,14 +37,9 @@ export default function SalesEditor({
                 </td>
                 <td>
                   <input
-                    value={row.stock}
-                    onChange={(e) => updateSalesRow(i, "stock", e.target.value)}
-                  />
-                </td>
-                <td>
-                  <input
-                    value={row.sold}
-                    onChange={(e) => updateSalesRow(i, "sold", e.target.value)}
+                    value={row.value}
+                    placeholder="100冊入34冊売"
+                    onChange={(e) => updateSalesRow(i, "value", e.target.value)}
                   />
                 </td>
               </tr>

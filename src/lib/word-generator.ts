@@ -60,7 +60,7 @@ export async function generateWord(
   form: OrderFormData,
   salesData: SalesRow[]
 ) {
-  const activeSales = salesData.filter((s) => s.store);
+  // sales data available for Word output
   const isbn13 = normalizeIsbn(form.isbn);
   const bookSpecs = [
     form.size,
@@ -256,18 +256,20 @@ export async function generateWord(
   }
 
   // Materials (fixed at bottom area)
-  children.push(
-    new Paragraph({
-      frame: frame(600, Y.materials, 5000, 600),
-      children: [
-        new TextRun({
-          text: "拡材のご希望：\n□A6POP\u3000\u3000□A4パネル（30冊以上）",
-          size: S(SIZES.materialsLabel),
-          font: FONTS.gothicUB,
-        }),
-      ],
-    })
-  );
+  if (!form.hideMaterials) {
+    children.push(
+      new Paragraph({
+        frame: frame(600, Y.materials, 5000, 600),
+        children: [
+          new TextRun({
+            text: `拡材のご希望：\n${form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）"}`,
+            size: S(SIZES.materialsLabel),
+            font: FONTS.gothicUB,
+          }),
+        ],
+      })
+    );
+  }
 
   // Badge text (fixed at bottom right)
   if (form.badgeText) {

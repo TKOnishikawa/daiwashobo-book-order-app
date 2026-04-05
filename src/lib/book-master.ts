@@ -18,6 +18,14 @@ export function buildIsbnIndex(
   for (const b of records) {
     index.set(b.isbn13, b);
     index.set(hyphenateIsbn(b.isbn13), b);
+    // 5-digit book code (isbn[7..12])
+    const digits = b.isbn13.replace(/[^0-9]/g, "");
+    if (digits.length === 13) {
+      const code5 = digits.substring(7, 12);
+      if (!index.has(code5)) {
+        index.set(code5, b);
+      }
+    }
   }
   return index;
 }
@@ -26,5 +34,6 @@ export function lookupByIsbn(
   index: Map<string, BookMasterRecord>,
   rawIsbn: string
 ): BookMasterRecord | undefined {
-  return index.get(rawIsbn) || index.get(normalizeIsbn(rawIsbn));
+  const normalized = normalizeIsbn(rawIsbn);
+  return index.get(rawIsbn) || index.get(normalized);
 }
