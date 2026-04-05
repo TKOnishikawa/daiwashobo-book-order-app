@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useCallback, useState } from "react";
+import { useMemo, useRef, useCallback, useState, useEffect } from "react";
 import type { OrderFormData, SalesRow, BookMasterRecord } from "@/types/book";
 import { normalizeIsbn } from "@/lib/book-master";
 
@@ -44,6 +44,8 @@ export default function OrderPreview({
   const coverInputRef = useRef<HTMLInputElement>(null);
   const displayInputRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const otTitleRef = useRef<HTMLDivElement>(null);
+  const [otTitleSize, setOtTitleSize] = useState(1.92);
   const [coords, setCoords] = useState<{ x: number; y: number } | null>(null);
 
   // Dev drag mode
@@ -130,6 +132,19 @@ export default function OrderPreview({
     [salesData]
   );
 
+
+  // Auto-fit ot-book-title to single line
+  useEffect(() => {
+    const el = otTitleRef.current;
+    if (!el) return;
+    let size = 1.92;
+    el.style.fontSize = `${size}rem`;
+    while (el.scrollWidth > el.clientWidth && size > 0.6) {
+      size -= 0.05;
+      el.style.fontSize = `${size}rem`;
+    }
+    setOtTitleSize(size);
+  }, [form.title]);
 
   const bookSpecs = [
     form.size,
@@ -479,7 +494,7 @@ export default function OrderPreview({
                   </td>
                   <td className="ot-qty-td"></td>
                   <td className="ot-book-td">
-                    <div className="ot-book-title">{form.title}</div>
+                    <div className="ot-book-title" ref={otTitleRef} style={{ fontSize: `${otTitleSize}rem`, whiteSpace: "nowrap", overflow: "hidden" }}>{form.title}</div>
                     {form.subtitle && (
                       <div className="ot-book-subtitle">{form.subtitle}</div>
                     )}

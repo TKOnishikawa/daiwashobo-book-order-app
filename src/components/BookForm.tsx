@@ -22,8 +22,8 @@ export default function BookForm({ form, updateField, setForm }: Props) {
           <span style={{ fontSize: "0.75rem", color: "var(--text-3)", whiteSpace: "nowrap" }}>文字サイズ: {form.titleSize}rem</span>
           <input
             type="range"
-            min={0.8}
-            max={3.5}
+            min={1.5}
+            max={2.8}
             step={0.1}
             value={form.titleSize}
             onChange={(e) => setForm((prev) => ({ ...prev, titleSize: parseFloat(e.target.value) }))}
