@@ -136,15 +136,19 @@ export default function OrderPreview({
   // Auto-fit ot-book-title to single line
   useEffect(() => {
     const el = otTitleRef.current;
-    if (!el) return;
+    if (!el || !el.parentElement) return;
+    const maxW = el.parentElement.clientWidth - 20; // padding
     let size = 1.92;
     el.style.fontSize = `${size}rem`;
-    while (el.scrollWidth > el.clientWidth && size > 0.6) {
+    el.style.display = "inline-block";
+    el.style.whiteSpace = "nowrap";
+    while (el.scrollWidth > maxW && size > 0.6) {
       size -= 0.05;
       el.style.fontSize = `${size}rem`;
     }
+    el.style.display = "";
     setOtTitleSize(size);
-  }, [form.title]);
+  }, [form.title, form.subtitle]);
 
   const bookSpecs = [
     form.size,
