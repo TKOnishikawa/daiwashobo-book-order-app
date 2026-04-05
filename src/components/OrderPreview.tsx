@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useCallback, useState, useEffect } from "react";
+import { useMemo, useRef, useCallback, useState } from "react";
 import type { OrderFormData, SalesRow, BookMasterRecord } from "@/types/book";
 import { normalizeIsbn } from "@/lib/book-master";
 
@@ -44,8 +44,6 @@ export default function OrderPreview({
   const coverInputRef = useRef<HTMLInputElement>(null);
   const displayInputRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const otTitleRef = useRef<HTMLDivElement>(null);
-  const [otTitleSize, setOtTitleSize] = useState(1.92);
   const [coords, setCoords] = useState<{ x: number; y: number } | null>(null);
 
   // Dev drag mode
@@ -133,25 +131,14 @@ export default function OrderPreview({
   );
 
 
-  // Auto-fit ot-book-title to single line using off-screen measurement
-  useEffect(() => {
-    const td = otTitleRef.current?.closest("td");
-    if (!td) return;
-    const maxW = td.clientWidth - 20;
-    // Create off-screen span to measure text width
-    const span = document.createElement("span");
-    span.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font-weight:900;letter-spacing:0.02em;";
-    span.textContent = form.title + (form.subtitle ? " " + form.subtitle : "");
-    document.body.appendChild(span);
-    let size = 1.92;
-    span.style.fontSize = `${size}rem`;
-    while (span.offsetWidth > maxW && size > 0.6) {
-      size -= 0.05;
-      span.style.fontSize = `${size}rem`;
-    }
-    document.body.removeChild(span);
-    setOtTitleSize(size);
-  }, [form.title, form.subtitle]);
+  // Auto-fit ot-book-title based on character count
+  const fullTitle = form.title + (form.subtitle ? " " + form.subtitle : "");
+  const otAutoSize =
+    fullTitle.length > 30 ? 0.85 :
+    fullTitle.length > 25 ? 1.0 :
+    fullTitle.length > 20 ? 1.2 :
+    fullTitle.length > 15 ? 1.5 :
+    1.92;
 
   const bookSpecs = [
     form.size,
@@ -501,7 +488,7 @@ export default function OrderPreview({
                   </td>
                   <td className="ot-qty-td"></td>
                   <td className="ot-book-td">
-                    <div className="ot-book-title" ref={otTitleRef} style={{ fontSize: `${otTitleSize}rem`, whiteSpace: "nowrap", overflow: "hidden" }}>{form.title}</div>
+                    <div className="ot-book-title" style={{ fontSize: `${otAutoSize}rem` }}>{form.title}</div>
                     {form.subtitle && (
                       <div className="ot-book-subtitle">{form.subtitle}</div>
                     )}
