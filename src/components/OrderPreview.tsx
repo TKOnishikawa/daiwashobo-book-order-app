@@ -8,7 +8,7 @@ const IS_DEV = process.env.NODE_ENV === "development";
 
 // Default positions (matches CSS)
 const DEFAULT_POSITIONS = {
-  cover: { left: 0, top: -387, width: 239, height: 351 },
+  cover: { left: 0, top: -30, width: 239, height: 351 },
   display: { left: 527, top: 572, width: 124, height: 182 },
 };
 
