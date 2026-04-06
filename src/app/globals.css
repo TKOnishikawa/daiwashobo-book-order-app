@@ -320,13 +320,13 @@ body { font-family: var(--font-jp); background: var(--bg-1); color: var(--text-1
   padding-bottom: 2px;
 }
 .ot-qty-td { vertical-align: top; text-align: center; font-size: 0.82rem; padding-top: 8px; }
-.ot-book-td { text-align: left; padding: 6px 10px; vertical-align: top; }
+.ot-book-td { text-align: left; padding: 6px 10px; vertical-align: top; position: relative; }
 .ot-book-title {
   font-size: 1.92rem; font-weight: 900; color: #000; line-height: 1.25;
   margin-bottom: 2px; letter-spacing: 0.02em;
 }
 .ot-book-subtitle { font-size: 0.943rem; font-weight: 700; color: #333; margin-bottom: 4px; line-height: 1.4; }
-.ot-book-isbn { font-size: 0.68rem; color: #555; margin-top: 4px; }
+.ot-book-isbn { font-size: 0.68rem; color: #555; position: absolute; bottom: 6px; left: 10px; right: 10px; }
 .of-section-label { font-size: 0.78rem; font-weight: 700; color: #333; margin-bottom: 3px; }
 
 /* Dev drag mode */

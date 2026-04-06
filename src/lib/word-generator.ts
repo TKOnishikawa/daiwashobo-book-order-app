@@ -347,7 +347,7 @@ export async function generateWord(
   if (!form.hideMaterials) {
     matParas.push(new Paragraph({
       spacing: { before: 20 },
-      children: [new TextRun({ text: "拡材のご希望：", bold: true, size: S(9), font: FONTS.gothicUB })],
+      children: [new TextRun({ text: form.materialsLabel || "拡材のご希望：", bold: true, size: S(9), font: FONTS.gothicUB })],
     }));
     matParas.push(new Paragraph({
       children: [new TextRun({ text: form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）", size: S(9), font: FONTS.gothicUB })],

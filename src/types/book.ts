@@ -34,5 +34,6 @@ export interface OrderFormData {
   promoLine3: string;
   prText: string;
   salesLabel: string;
+  materialsLabel: string;
   materialsText: string;
 }

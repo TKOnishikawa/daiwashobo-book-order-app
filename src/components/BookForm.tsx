@@ -230,18 +230,29 @@ export default function BookForm({ form, updateField, setForm, onHighlight, sale
             checked={form.hideMaterials}
             onChange={(e) => setForm((prev) => ({ ...prev, hideMaterials: e.target.checked }))}
           />
-          拡材のご希望を非表示
+          拡材セクションを非表示
         </label>
         {!form.hideMaterials && (
-          <div className="form-group" style={{ marginTop: 8 }}>
-            <label>拡材テキスト</label>
-            <input
-              type="text"
-              value={form.materialsText}
-              placeholder="□A6POP　　□A4パネル（30冊以上）"
-              onChange={(e) => updateField("materialsText", e.target.value)}
-            />
-          </div>
+          <>
+            <div className="form-group" style={{ marginTop: 8 }}>
+              <label>拡材ラベル</label>
+              <input
+                type="text"
+                value={form.materialsLabel}
+                placeholder="拡材のご希望："
+                onChange={(e) => updateField("materialsLabel", e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label>拡材テキスト</label>
+              <input
+                type="text"
+                value={form.materialsText}
+                placeholder="□A6POP　　□A4パネル（30冊以上）"
+                onChange={(e) => updateField("materialsText", e.target.value)}
+              />
+            </div>
+          </>
         )}
       </HL>
     </>

@@ -461,7 +461,7 @@ export default function OrderPreview({
           <div className="of-materials-row">
             {!form.hideMaterials && (
               <div className={`of-materials-box${hl("materials")}`}>
-                <div className="label">拡材のご希望：</div>
+                <div className="label">{form.materialsLabel || "拡材のご希望："}</div>
                 <div>{form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）"}</div>
               </div>
             )}

@@ -24,6 +24,7 @@ const INITIAL_FORM: OrderFormData = {
   promoLine3: "深井龍之介さん推薦！",
   prText: "",
   salesLabel: "初速販売実績",
+  materialsLabel: "拡材のご希望：",
   materialsText: "□A6POP\u3000\u3000□A4パネル（30冊以上）",
 };
 
