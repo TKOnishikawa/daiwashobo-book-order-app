@@ -8,15 +8,17 @@ interface Props {
   addSalesRow: () => void;
   removeSalesRow: (idx: number) => void;
   clearSales: () => void;
+  onHighlight: (area: string | null) => void;
 }
 
 export default function SalesEditor({
   salesData,
   updateSalesRow,
   clearSales,
+  onHighlight,
 }: Props) {
   return (
-    <>
+    <div onFocus={() => onHighlight("sales")} onBlur={() => onHighlight(null)}>
       <h3 style={{ marginTop: 20 }}>販売実績（4行固定）</h3>
       <div className="sales-editor">
         <table>
@@ -52,6 +54,6 @@ export default function SalesEditor({
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

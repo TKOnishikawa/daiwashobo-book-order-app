@@ -31,6 +31,7 @@ export default function HomePage() {
   }>({ type: "", message: "" });
   const [coverImage, setCoverImage] = useState<string | null>(null);
   const [displayImage, setDisplayImage] = useState<string | null>(null);
+  const [highlight, setHighlight] = useState<string | null>(null);
 
   const handleBookFound = (updates: Partial<OrderFormData>) => {
     setForm((prev) => ({ ...prev, ...updates }));
@@ -61,13 +62,33 @@ export default function HomePage() {
               status={status}
               setStatus={setStatus}
             />
-            <BookForm form={form} updateField={updateField} setForm={setForm} />
-            <SalesEditor
-              salesData={salesData}
-              updateSalesRow={updateSalesRow}
-              addSalesRow={addSalesRow}
-              removeSalesRow={removeSalesRow}
-              clearSales={clearSales}
+            <BookForm
+              form={form}
+              updateField={updateField}
+              setForm={setForm}
+              onHighlight={setHighlight}
+              salesEditor={
+                <>
+                  <h3 style={{ marginTop: 20 }}>販売実績</h3>
+                  <div className="form-group" onFocus={() => setHighlight("salesLabel")} onBlur={() => setHighlight(null)}>
+                    <label>セクションタイトル</label>
+                    <input
+                      type="text"
+                      value={form.salesLabel}
+                      placeholder="初速販売実績"
+                      onChange={(e) => updateField("salesLabel", e.target.value)}
+                    />
+                  </div>
+                  <SalesEditor
+                    salesData={salesData}
+                    updateSalesRow={updateSalesRow}
+                    addSalesRow={addSalesRow}
+                    removeSalesRow={removeSalesRow}
+                    clearSales={clearSales}
+                    onHighlight={setHighlight}
+                  />
+                </>
+              }
             />
             <ActionBar
               form={form}
@@ -92,6 +113,7 @@ export default function HomePage() {
             onCoverChange={setCoverImage}
             displayImage={displayImage}
             onDisplayChange={setDisplayImage}
+            highlight={highlight}
           />
         </div>
       </div>

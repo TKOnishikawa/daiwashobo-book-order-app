@@ -29,6 +29,7 @@ interface Props {
   onCoverChange: (url: string | null) => void;
   displayImage: string | null;
   onDisplayChange: (url: string | null) => void;
+  highlight: string | null;
 }
 
 export default function OrderPreview({
@@ -39,6 +40,7 @@ export default function OrderPreview({
   onCoverChange,
   displayImage,
   onDisplayChange,
+  highlight,
 }: Props) {
   const isbn13 = normalizeIsbn(form.isbn);
   const coverInputRef = useRef<HTMLInputElement>(null);
@@ -170,6 +172,9 @@ export default function OrderPreview({
   const coverPos = positions.cover;
   const displayPos = positions.display;
 
+  // Highlight helper: returns "hl-active" class when highlight matches any of the given areas
+  const hl = (...areas: string[]) => areas.includes(highlight || "") ? " hl-active" : "";
+
   // CSS output for dev panel
   const cssOutput = dragMode
     ? `cover: left:${coverPos.left} top:${coverPos.top} ${coverPos.width}x${coverPos.height} | display: left:${displayPos.left} top:${displayPos.top} ${displayPos.width}x${displayPos.height}`
@@ -246,9 +251,9 @@ export default function OrderPreview({
         )}
         <div className="of-content">
           {/* Black Banner */}
-          <div className="of-banner">
+          <div className={`of-banner${hl("doctype")}`}>
             {form.genreTag && (
-              <span className="of-genre-tag">
+              <span className={`of-genre-tag${hl("genreTag")}`}>
                 <svg className="genre-bg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
                   <polygon
                     points="60,0 72,6 84,2 87,14 102,18 98,30 120,40 98,50 102,62 87,66 84,78 72,74 60,80 48,74 36,78 33,66 18,62 22,50 0,40 22,30 18,18 33,14 36,2 48,6"
@@ -267,8 +272,8 @@ export default function OrderPreview({
 
           {/* Catch Copy - black bg, yellow text */}
           <div className="of-catch-banner">
-            <div className="of-catch-main">{form.catchCopy || "\u3000"}</div>
-            <div className="of-catch-sub">{form.subCatch || "\u3000"}</div>
+            <div className={`of-catch-main${hl("catchCopy")}`}>{form.catchCopy || "\u3000"}</div>
+            <div className={`of-catch-sub${hl("subCatch")}`}>{form.subCatch || "\u3000"}</div>
           </div>
 
           {/* FAX Row */}
@@ -286,12 +291,12 @@ export default function OrderPreview({
 
           {/* Title Block - green background */}
           <div className="of-title-block">
-            <div className="of-title" style={{ fontSize: `${form.titleSize}rem` }}>{form.title}</div>
+            <div className={`of-title${hl("title")}`} style={{ fontSize: `${form.titleSize}rem` }}>{form.title}</div>
             {form.subtitle && (
-              <div className="of-subtitle">{form.subtitle}</div>
+              <div className={`of-subtitle${hl("subtitle")}`}>{form.subtitle}</div>
             )}
             <div className="of-author-line">
-              <span className="author-info">
+              <span className={`author-info${hl("authorTitle", "authorName")}`}>
                 {form.authorTitle && (
                   <span className="author-title">{form.authorTitle}</span>
                 )}
@@ -300,7 +305,7 @@ export default function OrderPreview({
                 </span>
                 {form.author && <span className="author-suffix">著</span>}
               </span>
-              <span className="specs">{bookSpecs}</span>
+              <span className={`specs${hl("specs")}`}>{bookSpecs}</span>
             </div>
           </div>
 
@@ -314,8 +319,8 @@ export default function OrderPreview({
             {/* Right Column */}
             <div className="of-col-right">
               {/* Sales Section */}
-              <div className="of-sales-section">
-                <div className="of-sales-header">{form.salesLabel || "初速販売実績"}</div>
+              <div className={`of-sales-section${hl("sales", "salesLabel")}`}>
+                <div className={`of-sales-header${hl("salesLabel")}`}>{form.salesLabel || "初速販売実績"}</div>
                 <div className="of-sales-list">
                   {salesData.slice(0, 4).map((s, i) => (
                     <div className="of-sales-row" key={i}>
@@ -335,13 +340,13 @@ export default function OrderPreview({
               {/* Promo Lines - wrapped to avoid overlap with display photo */}
               <div className="of-promo-wrap">
                 {form.promoLine1 && (
-                  <div className="of-promo-line1">{form.promoLine1}</div>
+                  <div className={`of-promo-line1${hl("promo1")}`}>{form.promoLine1}</div>
                 )}
                 {form.promoLine2 && (
-                  <div className="of-promo-line2">{form.promoLine2}</div>
+                  <div className={`of-promo-line2${hl("promo2")}`}>{form.promoLine2}</div>
                 )}
                 {form.promoLine3 && (
-                  <div className="of-promo-line3">{form.promoLine3}</div>
+                  <div className={`of-promo-line3${hl("promo3")}`}>{form.promoLine3}</div>
                 )}
               </div>
             </div>
@@ -455,13 +460,13 @@ export default function OrderPreview({
         <div className="of-bottom-fixed">
           <div className="of-materials-row">
             {!form.hideMaterials && (
-              <div className="of-materials-box">
+              <div className={`of-materials-box${hl("materials")}`}>
                 <div className="label">拡材のご希望：</div>
                 <div>{form.materialsText || "□A6POP\u3000\u3000□A4パネル（30冊以上）"}</div>
               </div>
             )}
             {form.badgeText && (
-              <div className="of-reprint-badge">{form.badgeText}</div>
+              <div className={`of-reprint-badge${hl("badge")}`}>{form.badgeText}</div>
             )}
           </div>
 
@@ -475,7 +480,7 @@ export default function OrderPreview({
                   </th>
                   <th className="ot-header-qty" style={{ width: colWidths.qty }}>注文数</th>
                   <th className="ot-header-book">
-                    大和書房｜{form.author ? form.author + "\u3000著" : ""}
+                    大和書房｜{form.author ? form.author.replace(/\u3000+/g, "") + "\u3000著" : ""}
                   </th>
                 </tr>
               </thead>
@@ -488,9 +493,9 @@ export default function OrderPreview({
                   </td>
                   <td className="ot-qty-td"></td>
                   <td className="ot-book-td">
-                    <div className="ot-book-title" style={{ fontSize: `${otAutoSize}rem` }}>{form.title}</div>
+                    <div className="ot-book-title" style={{ fontSize: `${otAutoSize}rem` }}>{form.title.replace(/\u3000+/g, "")}</div>
                     {form.subtitle && (
-                      <div className="ot-book-subtitle">{form.subtitle}</div>
+                      <div className="ot-book-subtitle">{form.subtitle.replace(/\u3000+/g, "")}</div>
                     )}
                     <div className="ot-book-isbn">
                       ISBN{isbn13 ? isbn13 : ""}
