@@ -101,7 +101,7 @@ export default function BookForm({ form, updateField, setForm, onHighlight, sale
             <span style={{ fontSize: "0.75rem", color: "var(--text-3)", whiteSpace: "nowrap" }}>縦位置: {form.titleOffsetY > 0 ? "+" : ""}{form.titleOffsetY}px</span>
             <input
               type="range"
-              min={-40}
+              min={-5}
               max={40}
               step={1}
               value={form.titleOffsetY}
