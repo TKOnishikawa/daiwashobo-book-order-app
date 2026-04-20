@@ -90,7 +90,7 @@ export default function BookForm({ form, updateField, setForm, onHighlight, sale
             <input
               type="range"
               min={1.5}
-              max={2.8}
+              max={3.0}
               step={0.1}
               value={form.titleSize}
               onChange={(e) => setForm((prev) => ({ ...prev, titleSize: parseFloat(e.target.value) }))}
