@@ -98,7 +98,11 @@ export async function generateWord(
   displayImage: string | null
 ) {
   const isbn13 = normalizeIsbn(form.isbn);
-  const bookSpecs = [form.size, form.pages ? form.pages + "頁" : "", form.price ? "本体" + form.price + "円+税" : ""]
+  // 新刊案内時は「本体」→「予価」、「注文数」→「予約数」
+  const isAdvance = form.doctype === "新刊案内";
+  const priceLabel = isAdvance ? "予価" : "本体";
+  const qtyLabel = isAdvance ? "予約数" : "注文数";
+  const bookSpecs = [form.size, form.pages ? form.pages + "頁" : "", form.price ? priceLabel + form.price + "円+税" : ""]
     .filter(Boolean).join("\u3000");
   const activeSales = salesData.filter((s) => s.store);
 
@@ -193,10 +197,12 @@ export async function generateWord(
   // ============================================================
   // Row 5: Title — green bg, center aligned
   // ============================================================
+  // titleOffsetY (px) → TWIP変換 (1px ≈ 15 TWIP at 96dpi). 負値は0に丸める（spacing.beforeは非負）
+  const offsetTwip = Math.max(0, (form.titleOffsetY || 0) * 15);
   const titleParas: Paragraph[] = [
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { before: 40 },
+      spacing: { before: 40 + offsetTwip },
       children: [new TextRun({ text: form.title, bold: true, size: S(SIZES.title), color: C(COLORS.titleBlockText), font: FONTS.gothicUBP })],
     }),
   ];
@@ -389,7 +395,7 @@ export async function generateWord(
             children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "貴 店 印", bold: true, size: S(SIZES.orderHeader), font: FONTS.gothicUB })] })],
           }),
           new TableCell({ width: { size: OT_QTY, type: WidthType.DXA }, borders: THIN_BORDER, shading: { type: ShadingType.SOLID, color: "F0F0F0" }, verticalAlign: VerticalAlign.CENTER,
-            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "注文数", bold: true, size: S(SIZES.orderHeader), font: FONTS.gothicUB })] })],
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: qtyLabel, bold: true, size: S(SIZES.orderHeader), font: FONTS.gothicUB })] })],
           }),
           new TableCell({ width: { size: OT_BOOK, type: WidthType.DXA }, borders: THIN_BORDER, shading: { type: ShadingType.SOLID, color: "F0F0F0" }, verticalAlign: VerticalAlign.CENTER,
             children: [new Paragraph({ children: [new TextRun({ text: `大和書房｜${form.author.replace(/\u3000+/g, "")}\u3000著`, bold: true, size: S(SIZES.orderHeader), font: FONTS.gothicUB })] })],
@@ -411,7 +417,7 @@ export async function generateWord(
               new Paragraph({ spacing: { before: 40, after: 10 }, children: [new TextRun({ text: form.title.replace(/\u3000+/g, ""), bold: true, size: S(SIZES.orderTitle), font: FONTS.gothicUBP })] }),
               ...(form.subtitle ? [new Paragraph({ spacing: { before: 0, after: 10 }, children: [new TextRun({ text: form.subtitle.replace(/\u3000+/g, ""), size: S(SIZES.orderBody), font: FONTS.gothicUBP })] })] : []),
               new Paragraph({ spacing: { before: 20 }, children: [new TextRun({
-                text: `ISBN${isbn13}\u3000${form.price ? "本体" + form.price + "円+税" : ""}\u3000${form.pages ? form.pages + "頁" : ""}\u3000${form.size || ""}\u3000大和書房`,
+                text: `ISBN${isbn13}\u3000${form.price ? priceLabel + form.price + "円+税" : ""}\u3000${form.pages ? form.pages + "頁" : ""}\u3000${form.size || ""}\u3000大和書房`,
                 size: S(SIZES.orderIsbn), font: FONTS.msGothic, color: "555555",
               })] }),
             ],

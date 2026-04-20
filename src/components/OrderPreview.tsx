@@ -142,10 +142,15 @@ export default function OrderPreview({
     fullTitle.length > 15 ? 1.5 :
     1.92;
 
+  // 新刊案内時は「本体」→「予価」、「注文数」→「予約数」に切替
+  const isAdvance = form.doctype === "新刊案内";
+  const priceLabel = isAdvance ? "予価" : "本体";
+  const qtyLabel = isAdvance ? "予約数" : "注文数";
+
   const bookSpecs = [
     form.size,
     form.pages ? form.pages + "頁" : "",
-    form.price ? "本体" + form.price + "円+税" : "",
+    form.price ? priceLabel + form.price + "円+税" : "",
   ]
     .filter(Boolean)
     .join("\u3000");
@@ -291,9 +296,9 @@ export default function OrderPreview({
 
           {/* Title Block - green background */}
           <div className="of-title-block">
-            <div className={`of-title${hl("title")}`} style={{ fontSize: `${form.titleSize}rem` }}>{form.title}</div>
+            <div className={`of-title${hl("title")}`} style={{ fontSize: `${form.titleSize}rem`, transform: `translateY(${form.titleOffsetY}px)` }}>{form.title}</div>
             {form.subtitle && (
-              <div className={`of-subtitle${hl("subtitle")}`}>{form.subtitle}</div>
+              <div className={`of-subtitle${hl("subtitle")}`} style={{ transform: `translateY(${form.titleOffsetY}px)` }}>{form.subtitle}</div>
             )}
             <div className="of-author-line">
               <span className={`author-info${hl("authorTitle", "authorName")}`}>
@@ -478,7 +483,7 @@ export default function OrderPreview({
                   <th className="ot-header-stamp" colSpan={2} style={{ width: colWidths.stamp }}>
                     貴 店 印
                   </th>
-                  <th className="ot-header-qty" style={{ width: colWidths.qty }}>注文数</th>
+                  <th className="ot-header-qty" style={{ width: colWidths.qty }}>{qtyLabel}</th>
                   <th className="ot-header-book">
                     大和書房｜{form.author ? form.author.replace(/\u3000+/g, "") + "\u3000著" : ""}
                   </th>
@@ -500,7 +505,7 @@ export default function OrderPreview({
                     <div className="ot-book-isbn">
                       ISBN{isbn13 ? isbn13 : ""}
                       {"\u3000"}
-                      {form.price ? "本体" + form.price + "円+税" : ""}
+                      {form.price ? priceLabel + form.price + "円+税" : ""}
                       {"\u3000"}
                       {form.pages ? form.pages + "頁" : ""}
                       {"\u3000"}

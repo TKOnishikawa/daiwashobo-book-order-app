@@ -17,6 +17,7 @@ export interface OrderFormData {
   isbn: string;
   title: string;
   titleSize: number;
+  titleOffsetY: number;
   subtitle: string;
   author: string;
   authorTitle: string;

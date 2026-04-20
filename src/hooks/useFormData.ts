@@ -7,6 +7,7 @@ const INITIAL_FORM: OrderFormData = {
   isbn: "9784479798446",
   title: "資本主義と、生きていく。",
   titleSize: 2.6,
+  titleOffsetY: 0,
   subtitle: "",
   author: "品川皓亮",
   authorTitle: "",
